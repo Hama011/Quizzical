@@ -10,7 +10,7 @@ body {
 }
 
 main {
-    padding: 30px;
+    padding: 30px 0;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -96,7 +96,7 @@ main {
     color: white;
     font-size: 1.2rem;
     font-weight: 700;
-    margin-top: 10px;
+    margin: 10px 0;
     font-family: Inter;
 }
 
@@ -113,6 +113,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-height: 100%;
 }
 
 .question {
@@ -180,6 +181,8 @@ main {
 
 .wrong-answer {
     background-color: #f44336;
+    color: white;
+    border: none;
 }
 
 /* Responsive styles */
@@ -191,10 +194,6 @@ main {
     .start-page {
         width: 350px;
         height: 540px;
-    }
-
-    .main {
-        padding: 60px 0 30px 0;
     }
 
     .title {
