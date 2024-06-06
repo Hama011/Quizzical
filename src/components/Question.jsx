@@ -32,10 +32,10 @@ export default function Question({
                 "option " +
                 (
                   checkMode
-                  ? selectedOption === answer
-                    ? selectedOption === data.correct_answer ? "correct-answer" : "wrong-answer"
+                  ? selectedOption === decode(answer)
+                    ? selectedOption === decode(data.correct_answer) ? "correct-answer" : "wrong-answer"
                     : answer === data.correct_answer && "correct-answer"
-                  : selectedOption === answer && "selected"
+                  : selectedOption === decode(answer) && "selected"
                 )
               }
               onClick={(event) => handleOptionClick(event, idx)}

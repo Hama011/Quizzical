@@ -7,9 +7,19 @@ import Question from "./Question";
 import { TiArrowBack } from "react-icons/ti";
 
 export default function Quiz() {
-  const [data, setData] = useState(null);
   const location = useLocation();
-  const { quizOptions } = location.state;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.state) {
+      requestData();
+    } else {
+      navigate("/");
+    }
+  }, []);
+
+  const [data, setData] = useState(null);
+  const { quizOptions } = location.state || {};
   const [selectedOptions, setSelectedOptions] = useState({
     0: "",
     1: "",
@@ -20,10 +30,6 @@ export default function Quiz() {
   const [checkMode, setCheckMode] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
 
-  useEffect(() => {
-    requestData();
-  }, []);
-
   const requestData = () => {
     setCheckMode(false);
     setSelectedOptions({
@@ -33,19 +39,22 @@ export default function Quiz() {
       3: "",
       4: "",
     });
-    getData(quizOptions).then((data) => setData(data));
+    getData(quizOptions)
+      .then((data) => setData(data))
+      .catch((e) => navigate("/"));
   };
 
-  const navigate = useNavigate();
   const handleGoBack = () => {
     navigate("/");
   };
 
   const handleOptionsClick = (event, idx) => {
-    setSelectedOptions((preveData) => ({
-      ...preveData,
-      [idx]: event.target.innerText,
-    }));
+    if (!checkMode) {
+      setSelectedOptions((preveData) => ({
+        ...preveData,
+        [idx]: event.target.innerText,
+      }));
+    }
   };
 
   let questions = [];
@@ -73,6 +82,10 @@ export default function Quiz() {
     setCheckMode(true);
   };
 
+  const allOptionsSelected = Object.values(selectedOptions).every(
+    (option) => option !== ""
+  );
+
   let message;
   if (checkMode) {
     if (correctAnswers === 5) {
@@ -86,7 +99,7 @@ export default function Quiz() {
     }
   }
 
-  return (
+  return questions.length > 0 ? (
     <div className="quiz-container">
       <img src={ylob2} className="top-img" />
       <TiArrowBack className="goback-icon" onClick={handleGoBack} />
@@ -100,11 +113,14 @@ export default function Quiz() {
         <button
           className="btn check"
           onClick={checkMode ? requestData : handleCheckAnswers}
+          disabled={!checkMode && !allOptionsSelected}
         >
-          {checkMode ? "Play Again" : "Check Answers"}
+          {checkMode ? "Try Again" : "Check Answers"}
         </button>
       </div>
       <img src={blob2} className="bottom-img" />
     </div>
+  ) : (
+    <h4 style={{ color: "#353f7a" }}>Loading...</h4>
   );
 }
