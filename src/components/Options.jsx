@@ -29,7 +29,7 @@ function Options() {
       <img src={ylob} className="top-img" />
       <h1 className="title">Quizzical</h1>
       <p className="discription">Your knowledge journey begins here!</p>
-      <div className="option-containers">
+      <div className="option-container">
         <label htmlFor="category" className="labels">
           Category :{" "}
         </label>
@@ -67,7 +67,7 @@ function Options() {
           <option value="32">Entertainment: Cartoon &amp; Animations</option>
         </select>
       </div>
-      <div className="option-containers">
+      <div className="option-container">
         <label htmlFor="difficulty" className="labels">
           Difficulty :{" "}
         </label>
@@ -84,7 +84,7 @@ function Options() {
           <option value="hard">Hard</option>
         </select>
       </div>
-      <div className="option-containers">
+      <div className="option-container">
         <label htmlFor="type" className="labels">
           Type :{" "}
         </label>

@@ -23,7 +23,7 @@ export default function Question({
   return (
     <div>
       <p className="question">{decode(data.question)}</p>
-      <div className="options-container">
+      <div className="answers-container">
         {answers.map((answer, index) => {
           return (
             <p
