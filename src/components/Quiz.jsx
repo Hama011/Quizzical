@@ -71,7 +71,7 @@ export default function Quiz() {
       />
     ));
   }
-console.log(data)
+
   const handleCheckAnswers = () => {
     setCorrectAnswers(
       data
