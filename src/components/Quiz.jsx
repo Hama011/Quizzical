@@ -5,6 +5,7 @@ import ylob2 from "../assets/images/ylob2.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import Question from "./Question";
 import { TiArrowBack } from "react-icons/ti";
+import { decode } from "html-entities";
 
 export default function Quiz() {
   const location = useLocation();
@@ -70,12 +71,12 @@ export default function Quiz() {
       />
     ));
   }
-
+console.log(data)
   const handleCheckAnswers = () => {
     setCorrectAnswers(
       data
         .map((option, index) => {
-          return option.correct_answer === selectedOptions[index];
+          return decode(option.correct_answer) === selectedOptions[index];
         })
         .filter(Boolean).length
     );
